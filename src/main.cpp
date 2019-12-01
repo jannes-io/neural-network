@@ -2,8 +2,13 @@
 #include "Net.hpp"
 #include "TrainingData.hpp"
 
-int main() {
-    const auto trainingData = TrainingData::createFromFile("../training/addition.txt");
+int main(int argc, char** argv) {
+    if (argc < 1) {
+        std::cout << "Please provide a training data file." << std::endl;
+        return 1;
+    }
+
+    const auto trainingData = TrainingData::createFromFile(std::string(argv[1]));
     Net neuralNet(trainingData.topology);
 
     int passes = 0;
